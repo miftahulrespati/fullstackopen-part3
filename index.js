@@ -1,7 +1,14 @@
-const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
-let persons = require("./persons.json");
+import express from "express";
+import morgan from "morgan";
+import cors from "cors";
+import { readFile } from 'fs/promises';
+const jsonPersons = JSON.parse(
+  await readFile(
+    new URL('./persons.json', import.meta.url)
+  )
+);
+
+let persons = jsonPersons;
 
 const app = express();
 app.use(express.json());
@@ -13,6 +20,10 @@ app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms :body")
 );
 app.use(cors());
+
+app.get("/", (_, response) => {
+  response.send("It works!");
+});
 
 app.get("/info", (_, response) => {
   const info = `<p>Phonebook has info for ${persons.length} people</p>

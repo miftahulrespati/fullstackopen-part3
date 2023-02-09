@@ -18,6 +18,7 @@
     "url": "https://github.com/miftahulrespati/fullstackopen-part3/issues"
   },
   "homepage": "https://github.com/miftahulrespati/fullstackopen-part3#readme",
+  "type": "module",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
